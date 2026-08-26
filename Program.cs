@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
 
-
+            decimal bedrag = 0;
 
             Expense expense = new Expense();
             Expense expense1 = new Expense();
@@ -37,8 +37,11 @@
 
             foreach ( Expense item in expenses)
             {
-                Console.WriteLine($"Description: {item.Description}, Amount: {item.Amount}, Category: {item.Category}");
+                Console.WriteLine($"Description: {item.Description}, Amount: {item.Amount}$, Category: {item.Category}");
+
+                bedrag += item.Amount;
             }
+            Console.WriteLine($"Total expenses: {bedrag}$");
         }
     }
 }
