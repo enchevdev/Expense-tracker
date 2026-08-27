@@ -5,16 +5,7 @@
         static void Main(string[] args)
         {
 
-            
-
-            
-       
-
-
             List<Expense> expenses = new List<Expense>();
-
-
-            
 
             while (true)
             {
@@ -30,7 +21,15 @@
 
                 decimal bedrag = 0;
 
-                choice = int.Parse(Console.ReadLine());
+                try
+                {
+                    choice = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                { 
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+                
 
                 switch (choice)
                 {
@@ -38,19 +37,28 @@
 
                         Expense expense = new Expense();
 
-                        
-
                         Console.WriteLine("Enter description:");
+
                         expense.Description = Console.ReadLine();
 
-                        Console.WriteLine("Enter amount:");
-                        expense.Amount = decimal.Parse(Console.ReadLine());
+                        try
+                        {
+                            Console.WriteLine("Enter amount:");
+
+                            expense.Amount = decimal.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid decimal number for the amount.");
+
+                            break;
+                        }
 
                         Console.WriteLine("Enter category:");
-                        expense.Category = Console.ReadLine();
-                        expenses.Add(expense);
 
-                      
+                        expense.Category = Console.ReadLine();
+
+                        expenses.Add(expense);
 
                         break;
 
@@ -71,8 +79,8 @@
                         foreach (Expense item in expenses)
                         {
                             bedrag += item.Amount;
-                            
                         }
+
                         Console.WriteLine($"Total expenses: {bedrag}$");
 
                         break;
